@@ -1,4 +1,4 @@
-# Servicio para el manaejo de pacientes y doctores y citas
+# Servicio para el manaejo de pacientes, doctores y citas
 
 Este API es una capa que envuleve los servicio de la api de semble desarrollada en GraphQL y nos permite obtener resultados de tipo REST.
 
