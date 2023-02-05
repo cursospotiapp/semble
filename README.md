@@ -7,6 +7,7 @@ Este API es una capa que envuleve los servicio de la api de semble desarrollada 
 Para desplegar la aplicación en local únicamente debemos ejecutar:
 
 ```bash
+npm i
 npm run dev
 ```
 
