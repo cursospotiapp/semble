@@ -1,0 +1,306 @@
+openapi: 3.0.1
+info:
+  title: semble-api
+  description: Api para consultar datos de pacientes, médicos y citas
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/
+    description: Sandbox server (development test data)
+paths:
+  /api-semble/v1/obtener-pacientes:
+    get:
+      tags:
+        - Obtener un conjunto de pacientes
+      summary: Servicio que obtiene informacion de un conjunto de pacientes, filtrando por nombre en todos sus campos y por fecha de inicio y fin de sus citas
+      operationId: obtenerPacientes
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          required: true
+          description: Filtrar en los campos de pacientes por name
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaInicio
+          required: true
+          description: Filtro para la fecha inicio de la cita
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaFin
+          required: true
+          description: Filtro para la fecha fin de la cita
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Se envia respuesta de peticion cursada con exito
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
+
+  "/api-semble/v1/obtener-paciente/{id}":
+    get:
+      tags:
+        - Obtener un paciente dado su id
+      summary: Servicio que obtiene informacion de un paciente dado su id
+      operationId: obtenerPaciente
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del paciente
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaInicio
+          required: true
+          description: Filtro para la fecha inicio de la cita
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaFin
+          required: true
+          description: Filtro para la fecha fin de la cita
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Se envia respuesta de peticion cursada con exito
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
+
+  /api-semble/v1/obtener-doctor/{id}:
+    get:
+      tags:
+        - Obtener un doctor dado su id
+      summary: Servicio que obtiene informacion de un doctor dado su id
+      operationId: obtenerDoctor
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del doctor
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaInicio
+          required: true
+          description: Filtro para la fecha inicio de la cita
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaFin
+          required: true
+          description: Filtro para la fecha fin de la cita
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Se envia respuesta de peticion cursada con exito
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
+
+  /api-semble/v1/obtener-doctores:
+    get:
+      tags:
+        - Obtener un conjunto de doctores
+      summary: Servicio que obtiene informacion de un conjunto de doctores, filtrando por fecha de inicio y fin de sus citas
+      operationId: obtenerDoctores
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaInicio
+          required: true
+          description: Filtro para la fecha inicio de la cita
+
+        - schema:
+            type: string
+          in: query
+          name: fechaCitaFin
+          required: true
+          description: Filtro para la fecha fin de la cita
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Se envia respuesta de peticion cursada con exito
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
+
+  /api-semble/v1/cancelar-cita/{id}:
+    get:
+      tags:
+        - Eliminar una cita
+      summary: Servicio que elimina una cita dado su id
+      operationId: cancelarCita
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID de la cita a cancelar
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                description: Se envia respuesta de peticion cursada con exito
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
+
+  /api-semble/v1/concertar-cita:
+    post:
+      tags:
+        - Concertar una cita
+      summary: Servicio para concertar una cita a un paciente
+      description: Servicio para concertar una cita a un paciente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bookingData
+              properties:
+                bookingData:
+                  type: object
+                  required:
+                    - patient
+                    - location
+                    - bookingType
+                    - doctor
+                    - comments
+                    - start
+                    - end
+                  properties:
+                    patient:
+                      type: string
+                    location:
+                      type: string
+                    bookingType:
+                      type: string
+                    doctor:
+                      type: string
+                    comments:
+                      type: string
+                    start:
+                      type: string
+                    end:
+                      type: string
+                    sendPatientMessages:
+                      type: object
+                      required:
+                        - confirmation
+                      properties:
+                        confirmation:
+                          type: boolean
+
+      responses:
+        "200":
+          description: Se envia respuesta de peticion cursada con exito
+
+        "400":
+          description: Not found operation
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Algunos de los parametros introducidos no son correctos
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Ocurrio un error en el servidor
